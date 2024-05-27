@@ -1,65 +1,23 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
-import Button from "@mui/material/Button";
-import data from "./data.json"; // JSON dosyasından veri alınması
+import { styled } from "@mui/system";
+import data from "./data.json";
+import { columns } from "./Columns";
 
-const columns = [
-  { field: "status", headerName: "Status", width: 120, editable: true },
-  { field: "ip", headerName: "IP", width: 140, editable: true },
-  { field: "port", headerName: "Port", width: 110, editable: true },
-  {
-    field: "workGroupName",
-    headerName: "Work Group Name",
-    width: 150,
-    editable: true,
+const StyledDataGrid = styled(DataGrid)({
+  "& .MuiDataGrid-cell": {
+    cursor: "pointer",
   },
-  {
-    field: "deviceName",
-    headerName: "Device Name",
-    width: 150,
-    editable: true,
+  "& .MuiDataGrid-cell:focus": {
+    outline: "none",
   },
-  { field: "appState", headerName: "App State", width: 130, editable: true },
-  {
-    field: "powerSourcePeriod",
-    headerName: "Power Source Period",
-    width: 160,
-    editable: true,
+  "& .MuiDataGrid-row:nth-of-type(odd)": {
+    backgroundColor: "#f5f5f5",
   },
-  {
-    field: "programState",
-    headerName: "Program State",
-    width: 140,
-    editable: true,
+  "& .MuiDataGrid-row:hover": {
+    backgroundColor: "#e0f7fa",
   },
-  { field: "serialNo", headerName: "Serial No", width: 140, editable: true },
-  { field: "hwVersion", headerName: "HW Versiyon", width: 130, editable: true },
-  { field: "swVersion", headerName: "SW versiyon", width: 130, editable: true },
-  {
-    field: "sceneGroupSettings",
-    headerName: "Scene and Group Settings",
-    width: 200,
-    editable: true,
-  },
-  {
-    field: "control",
-    headerName: "Control",
-    width: 150,
-    renderCell: (params) => (
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => handleButtonClick(params.row)}
-      >
-        Control
-      </Button>
-    ),
-  },
-];
-
-const handleButtonClick = (row) => {
-  console.log("Button clicked for row: ", row);
-};
+});
 
 export default function DataTable() {
   const [rows, setRows] = useState(data);
@@ -78,7 +36,14 @@ export default function DataTable() {
 
   const editableColumns = columns.map((col) => ({
     ...col,
-    renderCell: col.field !== "control" ? customCell : col.renderCell,
+    renderCell:
+      col.field !== "control" &&
+      col.field !== "sceneGroupSettings" &&
+      col.field !== "status" &&
+      col.field !== "appState" &&
+      col.field !== "programState"
+        ? customCell
+        : col.renderCell,
   }));
 
   const handleCellClick = (params, event) => {
@@ -91,7 +56,7 @@ export default function DataTable() {
 
   return (
     <div style={{ height: 600, width: "100%" }}>
-      <DataGrid
+      <StyledDataGrid
         rows={rows}
         columns={editableColumns}
         processRowUpdate={handleProcessRowUpdate}
