@@ -1,7 +1,10 @@
 import Button from "@mui/material/Button";
+import SettingsIcon from "@mui/icons-material/Settings";
+import ControlCameraIcon from "@mui/icons-material/ControlCamera";
 
-const handleControlButtonClick = (row) => {
-  console.log("Control button clicked for row: ", row);
+const handleControlButtonClick = (row, setModalOpen, setSelectedRow) => {
+  setSelectedRow(row);
+  setModalOpen(true);
 };
 
 const handleSceneButtonClick = (row) => {
@@ -53,7 +56,7 @@ const renderProgramStateCell = (params) => {
   return <div style={{ color }}>{params.value}</div>;
 };
 
-export const columns = [
+export const columns = (setModalOpen, setSelectedRow) => [
   {
     field: "status",
     headerName: "Status",
@@ -101,11 +104,12 @@ export const columns = [
   {
     field: "sceneGroupSettings",
     headerName: "Scene and Group Settings",
-    width: 200,
+    width: 250,
     renderCell: (params) => (
       <Button
         variant="contained"
         color="secondary"
+        startIcon={<SettingsIcon />}
         onClick={() => handleSceneButtonClick(params.row)}
       >
         Settings
@@ -115,12 +119,15 @@ export const columns = [
   {
     field: "control",
     headerName: "Control",
-    width: 150,
+    width: 200,
     renderCell: (params) => (
       <Button
         variant="contained"
         color="primary"
-        onClick={() => handleControlButtonClick(params.row)}
+        startIcon={<ControlCameraIcon />}
+        onClick={() =>
+          handleControlButtonClick(params.row, setModalOpen, setSelectedRow)
+        }
       >
         Control
       </Button>

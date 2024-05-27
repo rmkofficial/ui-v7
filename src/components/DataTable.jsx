@@ -1,8 +1,16 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 import { styled } from "@mui/system";
-import data from "./data.json";
-import { columns } from "./Columns";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+} from "@mui/material";
+import data from "./data.json"; // JSON dosyasından veri alınması
+import { columns } from "./Columns"; // Sütunları import edin
+import FormComponent from "./FormComponent"; // Form bileşenini import edin
 
 const StyledDataGrid = styled(DataGrid)({
   "& .MuiDataGrid-cell": {
@@ -21,6 +29,8 @@ const StyledDataGrid = styled(DataGrid)({
 
 export default function DataTable() {
   const [rows, setRows] = useState(data);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
 
   const handleProcessRowUpdate = (newRow) => {
     const updatedRows = rows.map((row) =>
@@ -34,7 +44,7 @@ export default function DataTable() {
     <div style={{ cursor: "pointer" }}>{params.value}</div>
   );
 
-  const editableColumns = columns.map((col) => ({
+  const editableColumns = columns(setModalOpen, setSelectedRow).map((col) => ({
     ...col,
     renderCell:
       col.field !== "control" &&
@@ -52,6 +62,11 @@ export default function DataTable() {
 
   const handleRowClick = (params, event) => {
     event.stopPropagation();
+  };
+
+  const handleSave = (formData) => {
+    console.log("Form data saved:", formData);
+    setModalOpen(false);
   };
 
   return (
@@ -72,6 +87,17 @@ export default function DataTable() {
         onCellClick={handleCellClick}
         onRowClick={handleRowClick}
       />
+      <Dialog open={modalOpen} onClose={() => setModalOpen(false)}>
+        <DialogTitle>Control Form</DialogTitle>
+        <DialogContent>
+          <FormComponent onSave={handleSave} selectedRow={selectedRow} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setModalOpen(false)} color="secondary">
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
