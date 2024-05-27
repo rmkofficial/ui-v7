@@ -8,9 +8,9 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
-import data from "./data.json"; // JSON dosyasından veri alınması
-import { columns } from "./Columns"; // Sütunları import edin
-import FormComponent from "./FormComponent"; // Form bileşenini import edin
+import data from "./data.json";
+import { columns } from "./Columns";
+import FormComponent from "./FormComponent";
 
 const StyledDataGrid = styled(DataGrid)({
   "& .MuiDataGrid-cell": {
@@ -65,7 +65,11 @@ export default function DataTable() {
   };
 
   const handleSave = (formData) => {
-    console.log("Form data saved:", formData);
+    const combinedData = {
+      formData,
+      selectedRow,
+    };
+    console.log("Combined data:", JSON.stringify(combinedData, null, 2));
     setModalOpen(false);
   };
 
