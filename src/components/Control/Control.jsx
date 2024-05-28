@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
-import FormComponent from "./FormComponent"; // Import FormComponent
-import NestedList from "./NestedList"; // Import NestedList
+import FormComponent from "./FormComponent";
+import NestedList from "./NestedList";
 import PropTypes from "prop-types";
 
 const Control = ({ onSave, selectedRow }) => {

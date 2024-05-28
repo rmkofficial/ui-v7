@@ -7,8 +7,13 @@ const handleControlButtonClick = (row, setModalOpen, setSelectedRow) => {
   setModalOpen(true);
 };
 
-const handleSceneButtonClick = (row) => {
-  console.log("Scene and Group Settings button clicked for row: ", row);
+const handleSettingsButtonClick = (
+  row,
+  setSettingsModalOpen,
+  setSelectedSettingsRow
+) => {
+  setSelectedSettingsRow(row);
+  setSettingsModalOpen(true);
 };
 
 const renderStatusCell = (params) => {
@@ -56,7 +61,12 @@ const renderProgramStateCell = (params) => {
   return <div style={{ color }}>{params.value}</div>;
 };
 
-export const columns = (setModalOpen, setSelectedRow) => [
+export const columns = (
+  setModalOpen,
+  setSelectedRow,
+  setSettingsModalOpen,
+  setSelectedSettingsRow
+) => [
   {
     field: "status",
     headerName: "Status",
@@ -110,7 +120,13 @@ export const columns = (setModalOpen, setSelectedRow) => [
         variant="contained"
         color="secondary"
         startIcon={<SettingsIcon />}
-        onClick={() => handleSceneButtonClick(params.row)}
+        onClick={() =>
+          handleSettingsButtonClick(
+            params.row,
+            setSettingsModalOpen,
+            setSelectedSettingsRow
+          )
+        }
       >
         Settings
       </Button>

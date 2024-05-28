@@ -11,6 +11,7 @@ import {
 import data from "./data.json"; // JSON dosyasından veri alınması
 import { columns } from "./Columns"; // Sütunları import edin
 import Control from "./Control/Control"; // Control bileşenini import edin
+import Settings from "./Settings/Settings"; // Settings bileşenini import edin
 
 const StyledDataGrid = styled(DataGrid)({
   "& .MuiDataGrid-cell": {
@@ -122,7 +123,7 @@ export default function DataTable() {
       >
         <DialogTitle>Settings Form</DialogTitle>
         <DialogContent>
-          <Control
+          <Settings
             onSave={handleSettingsSave}
             selectedRow={selectedSettingsRow}
           />
