@@ -114,7 +114,7 @@ export const columns = (
   {
     field: "sceneGroupSettings",
     headerName: "Scene and Group Settings",
-    width: 250,
+    width: 200,
     renderCell: (params) => (
       <Button
         variant="contained"
@@ -135,7 +135,7 @@ export const columns = (
   {
     field: "control",
     headerName: "Control",
-    width: 200,
+    width: 160,
     renderCell: (params) => (
       <Button
         variant="contained"

@@ -15,7 +15,7 @@ const SceneDataGrid = ({ rows, setRows }) => {
       field: "percentage",
       headerName: "Percentage",
       type: "number",
-      width: 180,
+      width: 120,
       editable: true,
       align: "left",
       headerAlign: "left",
@@ -23,7 +23,7 @@ const SceneDataGrid = ({ rows, setRows }) => {
   ];
 
   return (
-    <div style={{ height: 600, width: "100%" }}>
+    <div style={{ height: 500, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}

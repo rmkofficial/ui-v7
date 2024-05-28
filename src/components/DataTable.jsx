@@ -106,9 +106,14 @@ export default function DataTable() {
         onCellClick={handleCellClick}
         onRowClick={handleRowClick}
       />
-      <Dialog open={modalOpen} onClose={() => setModalOpen(false)}>
+      <Dialog
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        maxWidth="md"
+        fullWidth
+      >
         <DialogTitle>Control Form</DialogTitle>
-        <DialogContent>
+        <DialogContent dividers={true} sx={{ overflowX: "hidden" }}>
           <Control onSave={handleSave} selectedRow={selectedRow} />
         </DialogContent>
         <DialogActions>
@@ -120,9 +125,11 @@ export default function DataTable() {
       <Dialog
         open={settingsModalOpen}
         onClose={() => setSettingsModalOpen(false)}
+        maxWidth="md"
+        fullWidth
       >
         <DialogTitle>Settings Form</DialogTitle>
-        <DialogContent>
+        <DialogContent dividers={true} sx={{ overflowX: "hidden" }}>
           <Settings
             onSave={handleSettingsSave}
             selectedRow={selectedSettingsRow}

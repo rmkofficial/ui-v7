@@ -39,9 +39,9 @@ const Scene = ({ onSave }) => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
-      <Box sx={{ display: "flex", flexDirection: "row", width: "100%" }}>
-        <Box sx={{ width: "25%", paddingRight: 2 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", width: "100%", p: 2 }}>
+      <Box sx={{ display: "flex", flexDirection: "row", width: "100%", mb: 2 }}>
+        <Box sx={{ width: "25%", paddingRight: 1 }}>
           <SceneDropdown
             label="Individual"
             options={data.individuals}
@@ -49,19 +49,20 @@ const Scene = ({ onSave }) => {
             handleChange={handleIndividualChange}
           />
         </Box>
-        <Box sx={{ width: "75%", paddingLeft: 2 }}>
+        <Box sx={{ width: "75%", paddingLeft: 2, ml: 5, paddingRight: 5 }}>
+          {" "}
           <SceneDataGrid rows={rows} setRows={setRows} />
-          <Box sx={{ marginTop: 2, display: "flex" }}>
-            <Button
-              type="button"
-              variant="contained"
-              color="primary"
-              onClick={handleSave}
-            >
-              SAVE
-            </Button>
-          </Box>
         </Box>
+      </Box>
+      <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
+        <Button
+          type="button"
+          variant="contained"
+          color="primary"
+          onClick={handleSave}
+        >
+          SAVE
+        </Button>
       </Box>
     </Box>
   );

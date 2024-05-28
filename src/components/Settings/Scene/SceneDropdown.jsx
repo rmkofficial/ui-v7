@@ -20,7 +20,7 @@ const MenuProps = {
 const SceneDropdown = ({ label, options, selectedOptions, handleChange }) => {
   return (
     <Box sx={{ width: "100%" }}>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 250 }}>
         <InputLabel>{label}</InputLabel>
         <Select
           multiple
