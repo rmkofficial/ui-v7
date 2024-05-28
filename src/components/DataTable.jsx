@@ -8,9 +8,9 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
-import data from "./data.json";
-import { columns } from "./Columns";
-import FormComponent from "./FormComponent";
+import data from "./data.json"; // JSON dosyasından veri alınması
+import { columns } from "./Columns"; // Sütunları import edin
+import Control from "./Control/Control"; // Control bileşenini import edin
 
 const StyledDataGrid = styled(DataGrid)({
   "& .MuiDataGrid-cell": {
@@ -31,6 +31,8 @@ export default function DataTable() {
   const [rows, setRows] = useState(data);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [selectedSettingsRow, setSelectedSettingsRow] = useState(null);
 
   const handleProcessRowUpdate = (newRow) => {
     const updatedRows = rows.map((row) =>
@@ -44,7 +46,12 @@ export default function DataTable() {
     <div style={{ cursor: "pointer" }}>{params.value}</div>
   );
 
-  const editableColumns = columns(setModalOpen, setSelectedRow).map((col) => ({
+  const editableColumns = columns(
+    setModalOpen,
+    setSelectedRow,
+    setSettingsModalOpen,
+    setSelectedSettingsRow
+  ).map((col) => ({
     ...col,
     renderCell:
       col.field !== "control" &&
@@ -65,12 +72,19 @@ export default function DataTable() {
   };
 
   const handleSave = (formData) => {
-    const combinedData = {
-      formData,
-      selectedRow,
-    };
-    console.log("Combined data:", JSON.stringify(combinedData, null, 2));
+    console.log(
+      "Form data and selected items:",
+      JSON.stringify(formData, null, 2)
+    );
     setModalOpen(false);
+  };
+
+  const handleSettingsSave = (formData) => {
+    console.log(
+      "Settings data and selected items:",
+      JSON.stringify(formData, null, 2)
+    );
+    setSettingsModalOpen(false);
   };
 
   return (
@@ -94,10 +108,27 @@ export default function DataTable() {
       <Dialog open={modalOpen} onClose={() => setModalOpen(false)}>
         <DialogTitle>Control Form</DialogTitle>
         <DialogContent>
-          <FormComponent onSave={handleSave} selectedRow={selectedRow} />
+          <Control onSave={handleSave} selectedRow={selectedRow} />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setModalOpen(false)} color="secondary">
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={settingsModalOpen}
+        onClose={() => setSettingsModalOpen(false)}
+      >
+        <DialogTitle>Settings Form</DialogTitle>
+        <DialogContent>
+          <Control
+            onSave={handleSettingsSave}
+            selectedRow={selectedSettingsRow}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setSettingsModalOpen(false)} color="secondary">
             Cancel
           </Button>
         </DialogActions>
