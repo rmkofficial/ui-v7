@@ -1,0 +1,15 @@
+{
+  "rooms": [
+    { "id": 1, "name": "Room 1" },
+    { "id": 2, "name": "Room 2" }
+  ],
+  "groups": [
+    { "id": 1, "name": "Group 1" },
+    { "id": 2, "name": "Group 2" }
+  ],
+  "individuals": [
+    { "id": 1, "name": "Ind 1" },
+    { "id": 2, "name": "Ind 2" },
+    { "id": 3, "name": "Ind 3" }
+  ]
+}
