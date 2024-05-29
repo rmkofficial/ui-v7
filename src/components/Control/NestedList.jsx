@@ -134,8 +134,8 @@ const NestedList = ({ onSelectionChange }) => {
         sx={{
           cursor: "pointer",
           "&:hover": { bgcolor: "action.hover" },
-          py: 0.1, // Reduce padding to decrease row height
-          minHeight: 24, // Set minimum height to reduce overall height
+          py: 0.1,
+          minHeight: 24,
         }}
         onClick={() => handleToggle("wg")}
       >
@@ -143,13 +143,12 @@ const NestedList = ({ onSelectionChange }) => {
           checked={!!checked["wg"]}
           onClick={(event) => event.stopPropagation()}
           onChange={() => handleCheck("wg", true, false, false)}
-          sx={{ cursor: "pointer", py: 0 }} // Reduce padding
+          sx={{ cursor: "pointer", py: 0 }}
         />
         <ListItemText
           primary="WG"
           primaryTypographyProps={{ variant: "body2" }}
         />{" "}
-        {/* Use smaller font size */}
         {open["wg"] ? (
           <ExpandLess fontSize="small" />
         ) : (
@@ -162,11 +161,11 @@ const NestedList = ({ onSelectionChange }) => {
             <div key={`rcu-${rcuIndex}`}>
               <ListItem
                 sx={{
-                  pl: 2, // Reduce padding-left
+                  pl: 2,
                   cursor: "pointer",
                   "&:hover": { bgcolor: "action.hover" },
-                  py: 0.1, // Reduce padding to decrease row height
-                  minHeight: 24, // Set minimum height to reduce overall height
+                  py: 0.1,
+                  minHeight: 24,
                 }}
                 onClick={() => handleToggle(`rcu-${rcuIndex}`)}
               >
@@ -176,13 +175,12 @@ const NestedList = ({ onSelectionChange }) => {
                   onChange={() =>
                     handleCheck(`rcu-${rcuIndex}`, false, true, false, rcuIndex)
                   }
-                  sx={{ cursor: "pointer", py: 0 }} // Reduce padding
+                  sx={{ cursor: "pointer", py: 0 }}
                 />
                 <ListItemText
                   primary={rcu.name}
                   primaryTypographyProps={{ variant: "body2" }}
                 />{" "}
-                {/* Use smaller font size */}
                 {open[`rcu-${rcuIndex}`] ? (
                   <ExpandLess fontSize="small" />
                 ) : (
@@ -199,11 +197,11 @@ const NestedList = ({ onSelectionChange }) => {
                     <div key={`rcu-${rcuIndex}-group-${groupIndex}`}>
                       <ListItem
                         sx={{
-                          pl: 4, // Reduce padding-left
+                          pl: 4,
                           cursor: "pointer",
                           "&:hover": { bgcolor: "action.hover" },
-                          py: 0.1, // Reduce padding to decrease row height
-                          minHeight: 24, // Set minimum height to reduce overall height
+                          py: 0.1,
+                          minHeight: 24,
                         }}
                         onClick={() =>
                           handleToggle(`rcu-${rcuIndex}-group-${groupIndex}`)
@@ -224,13 +222,12 @@ const NestedList = ({ onSelectionChange }) => {
                               groupIndex
                             )
                           }
-                          sx={{ cursor: "pointer", py: 0 }} // Reduce padding
+                          sx={{ cursor: "pointer", py: 0 }}
                         />
                         <ListItemText
                           primary={group.name}
                           primaryTypographyProps={{ variant: "body2" }}
                         />{" "}
-                        {/* Use smaller font size */}
                         {open[`rcu-${rcuIndex}-group-${groupIndex}`] ? (
                           <ExpandLess fontSize="small" />
                         ) : (
@@ -247,11 +244,11 @@ const NestedList = ({ onSelectionChange }) => {
                             <ListItem
                               button
                               sx={{
-                                pl: 6, // Reduce padding-left
+                                pl: 6,
                                 cursor: "pointer",
                                 "&:hover": { bgcolor: "action.hover" },
-                                py: 0.1, // Reduce padding to decrease row height
-                                minHeight: 24, // Set minimum height to reduce overall height
+                                py: 0.1,
+                                minHeight: 24,
                               }}
                               key={`rcu-${rcuIndex}-group-${groupIndex}-ind-${indIndex}`}
                             >
@@ -272,13 +269,12 @@ const NestedList = ({ onSelectionChange }) => {
                                     groupIndex
                                   )
                                 }
-                                sx={{ cursor: "pointer", py: 0 }} // Reduce padding
+                                sx={{ cursor: "pointer", py: 0 }}
                               />
                               <ListItemText
                                 primary={ind}
                                 primaryTypographyProps={{ variant: "body2" }}
                               />{" "}
-                              {/* Use smaller font size */}
                             </ListItem>
                           ))}
                         </List>
