@@ -59,7 +59,8 @@ export default function DataTable() {
       col.field !== "sceneGroupSettings" &&
       col.field !== "status" &&
       col.field !== "appState" &&
-      col.field !== "programState"
+      col.field !== "programState" &&
+      col.field !== "deviceName"
         ? customCell
         : col.renderCell,
   }));

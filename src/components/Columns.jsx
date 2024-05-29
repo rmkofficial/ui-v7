@@ -1,10 +1,16 @@
 import Button from "@mui/material/Button";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ControlCameraIcon from "@mui/icons-material/ControlCamera";
+import InfoIcon from "@mui/icons-material/Info";
 
 const handleControlButtonClick = (row, setModalOpen, setSelectedRow) => {
+  console.log("Control button clicked for row:", row);
   setSelectedRow(row);
   setModalOpen(true);
+};
+
+const handleDeviceSettingsButtonClick = (row) => {
+  console.log("DeviceSettings button clicked for row:", row);
 };
 
 const handleSettingsButtonClick = (
@@ -12,8 +18,13 @@ const handleSettingsButtonClick = (
   setSettingsModalOpen,
   setSelectedSettingsRow
 ) => {
+  console.log("Settings button clicked for row:", row);
   setSelectedSettingsRow(row);
   setSettingsModalOpen(true);
+};
+
+const handleDetailsButtonClick = (row) => {
+  console.log("Details button clicked for row:", row);
 };
 
 const renderStatusCell = (params) => {
@@ -85,8 +96,33 @@ export const columns = (
   {
     field: "deviceName",
     headerName: "Device Name",
-    width: 150,
+    width: 330,
     editable: true,
+    renderCell: (params) => (
+      <div>
+        {params.value}
+        <Button
+          variant="outlined"
+          color="primary"
+          startIcon={<SettingsIcon />}
+          onClick={() => handleDeviceSettingsButtonClick(params.row)}
+          size="small"
+          style={{ marginLeft: 10 }}
+        >
+          Settings
+        </Button>
+        <Button
+          variant="outlined"
+          color="secondary"
+          startIcon={<InfoIcon />}
+          onClick={() => handleDetailsButtonClick(params.row)}
+          size="small"
+          style={{ marginLeft: 10 }}
+        >
+          Details
+        </Button>
+      </div>
+    ),
   },
   {
     field: "appState",
@@ -109,8 +145,8 @@ export const columns = (
     renderCell: renderProgramStateCell,
   },
   { field: "serialNo", headerName: "Serial No", width: 140, editable: true },
-  { field: "hwVersion", headerName: "HW Versiyon", width: 130, editable: true },
-  { field: "swVersion", headerName: "SW versiyon", width: 130, editable: true },
+  { field: "hwVersion", headerName: "HW Version", width: 130, editable: true },
+  { field: "swVersion", headerName: "SW Version", width: 130, editable: true },
   {
     field: "sceneGroupSettings",
     headerName: "Scene and Group Settings",
