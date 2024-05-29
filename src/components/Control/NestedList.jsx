@@ -131,17 +131,30 @@ const NestedList = ({ onSelectionChange }) => {
       sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
     >
       <ListItem
-        sx={{ cursor: "pointer", "&:hover": { bgcolor: "action.hover" } }}
+        sx={{
+          cursor: "pointer",
+          "&:hover": { bgcolor: "action.hover" },
+          py: 0.1, // Reduce padding to decrease row height
+          minHeight: 24, // Set minimum height to reduce overall height
+        }}
         onClick={() => handleToggle("wg")}
       >
         <Checkbox
           checked={!!checked["wg"]}
           onClick={(event) => event.stopPropagation()}
           onChange={() => handleCheck("wg", true, false, false)}
-          sx={{ cursor: "pointer" }}
+          sx={{ cursor: "pointer", py: 0 }} // Reduce padding
         />
-        <ListItemText primary="WG" />
-        {open["wg"] ? <ExpandLess /> : <ExpandMore />}
+        <ListItemText
+          primary="WG"
+          primaryTypographyProps={{ variant: "body2" }}
+        />{" "}
+        {/* Use smaller font size */}
+        {open["wg"] ? (
+          <ExpandLess fontSize="small" />
+        ) : (
+          <ExpandMore fontSize="small" />
+        )}
       </ListItem>
       <Collapse in={open["wg"]} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
@@ -149,9 +162,11 @@ const NestedList = ({ onSelectionChange }) => {
             <div key={`rcu-${rcuIndex}`}>
               <ListItem
                 sx={{
-                  pl: 4,
+                  pl: 2, // Reduce padding-left
                   cursor: "pointer",
                   "&:hover": { bgcolor: "action.hover" },
+                  py: 0.1, // Reduce padding to decrease row height
+                  minHeight: 24, // Set minimum height to reduce overall height
                 }}
                 onClick={() => handleToggle(`rcu-${rcuIndex}`)}
               >
@@ -161,10 +176,18 @@ const NestedList = ({ onSelectionChange }) => {
                   onChange={() =>
                     handleCheck(`rcu-${rcuIndex}`, false, true, false, rcuIndex)
                   }
-                  sx={{ cursor: "pointer" }}
+                  sx={{ cursor: "pointer", py: 0 }} // Reduce padding
                 />
-                <ListItemText primary={rcu.name} />
-                {open[`rcu-${rcuIndex}`] ? <ExpandLess /> : <ExpandMore />}
+                <ListItemText
+                  primary={rcu.name}
+                  primaryTypographyProps={{ variant: "body2" }}
+                />{" "}
+                {/* Use smaller font size */}
+                {open[`rcu-${rcuIndex}`] ? (
+                  <ExpandLess fontSize="small" />
+                ) : (
+                  <ExpandMore fontSize="small" />
+                )}
               </ListItem>
               <Collapse
                 in={open[`rcu-${rcuIndex}`]}
@@ -176,9 +199,11 @@ const NestedList = ({ onSelectionChange }) => {
                     <div key={`rcu-${rcuIndex}-group-${groupIndex}`}>
                       <ListItem
                         sx={{
-                          pl: 8,
+                          pl: 4, // Reduce padding-left
                           cursor: "pointer",
                           "&:hover": { bgcolor: "action.hover" },
+                          py: 0.1, // Reduce padding to decrease row height
+                          minHeight: 24, // Set minimum height to reduce overall height
                         }}
                         onClick={() =>
                           handleToggle(`rcu-${rcuIndex}-group-${groupIndex}`)
@@ -199,13 +224,17 @@ const NestedList = ({ onSelectionChange }) => {
                               groupIndex
                             )
                           }
-                          sx={{ cursor: "pointer" }}
+                          sx={{ cursor: "pointer", py: 0 }} // Reduce padding
                         />
-                        <ListItemText primary={group.name} />
+                        <ListItemText
+                          primary={group.name}
+                          primaryTypographyProps={{ variant: "body2" }}
+                        />{" "}
+                        {/* Use smaller font size */}
                         {open[`rcu-${rcuIndex}-group-${groupIndex}`] ? (
-                          <ExpandLess />
+                          <ExpandLess fontSize="small" />
                         ) : (
-                          <ExpandMore />
+                          <ExpandMore fontSize="small" />
                         )}
                       </ListItem>
                       <Collapse
@@ -218,9 +247,11 @@ const NestedList = ({ onSelectionChange }) => {
                             <ListItem
                               button
                               sx={{
-                                pl: 12,
+                                pl: 6, // Reduce padding-left
                                 cursor: "pointer",
                                 "&:hover": { bgcolor: "action.hover" },
+                                py: 0.1, // Reduce padding to decrease row height
+                                minHeight: 24, // Set minimum height to reduce overall height
                               }}
                               key={`rcu-${rcuIndex}-group-${groupIndex}-ind-${indIndex}`}
                             >
@@ -241,9 +272,13 @@ const NestedList = ({ onSelectionChange }) => {
                                     groupIndex
                                   )
                                 }
-                                sx={{ cursor: "pointer" }}
+                                sx={{ cursor: "pointer", py: 0 }} // Reduce padding
                               />
-                              <ListItemText primary={ind} />
+                              <ListItemText
+                                primary={ind}
+                                primaryTypographyProps={{ variant: "body2" }}
+                              />{" "}
+                              {/* Use smaller font size */}
                             </ListItem>
                           ))}
                         </List>
