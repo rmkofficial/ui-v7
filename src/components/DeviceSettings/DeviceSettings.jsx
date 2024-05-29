@@ -1,31 +1,10 @@
 import { useState } from "react";
-import { AppBar, Tabs, Tab, Box, styled } from "@mui/material";
+import { Box, Tab, Tabs, Button, AppBar } from "@mui/material";
 import GeneralSettings from "./Tab/GeneralSettings";
 import EthernetSettings from "./Tab/EthernetSettings";
 import RTCSettings from "./Tab/RTCSettings";
 import MemInformation from "./Tab/MemInformation";
 import PropTypes from "prop-types";
-
-const StyledTabs = styled(Tabs)({
-  backgroundColor: "#f5f5f5",
-  "& .MuiTabs-indicator": {
-    backgroundColor: "#1976d2",
-  },
-});
-
-const StyledTab = styled(Tab)({
-  textTransform: "none",
-  minWidth: 72,
-  fontWeight: 600,
-  marginRight: "10px",
-  "&.Mui-selected": {
-    color: "#1976d2",
-  },
-  "&:hover": {
-    color: "#1976d2",
-    opacity: 1,
-  },
-});
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -58,18 +37,21 @@ const DeviceSettings = () => {
   };
 
   return (
-    <div>
-      <AppBar position="static">
-        <StyledTabs
+    <Box>
+      <AppBar
+        position="static"
+        sx={{ backgroundColor: "transparent", boxShadow: "none" }}
+      >
+        <Tabs
           value={value}
           onChange={handleChange}
           aria-label="device settings tabs"
         >
-          <StyledTab label="RCU General Settings" {...a11yProps(0)} />
-          <StyledTab label="Ethernet Settings" {...a11yProps(1)} />
-          <StyledTab label="RTC Settings" {...a11yProps(2)} />
-          <StyledTab label="Mem Information" {...a11yProps(3)} />
-        </StyledTabs>
+          <Tab label="RCU General Settings" {...a11yProps(0)} />
+          <Tab label="Ethernet Settings" {...a11yProps(1)} />
+          <Tab label="RTC Settings" {...a11yProps(2)} />
+          <Tab label="Mem Information" {...a11yProps(3)} />
+        </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <GeneralSettings />
@@ -83,7 +65,15 @@ const DeviceSettings = () => {
       <TabPanel value={value} index={3}>
         <MemInformation />
       </TabPanel>
-    </div>
+      <Box sx={{ mt: 2, display: "flex", justifyContent: "flex-end" }}>
+        <Button variant="contained" color="primary" sx={{ mr: 2 }}>
+          Güncelle
+        </Button>
+        <Button variant="outlined" color="primary">
+          İptal
+        </Button>
+      </Box>
+    </Box>
   );
 };
 
