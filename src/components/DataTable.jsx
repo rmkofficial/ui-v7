@@ -1,3 +1,7 @@
+// import Button from "@mui/material/Button";
+// import SettingsIcon from "@mui/icons-material/Settings";
+// import ControlCameraIcon from "@mui/icons-material/ControlCamera";
+// import InfoIcon from "@mui/icons-material/Info";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 import { styled } from "@mui/system";
@@ -6,12 +10,13 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Button,
+  Button as MuiButton,
 } from "@mui/material";
 import data from "./data.json"; // JSON dosyasından veri alınması
 import { columns } from "./Columns"; // Sütunları import edin
 import Control from "./Control/Control"; // Control bileşenini import edin
 import Settings from "./Settings/Settings"; // Settings bileşenini import edin
+import DeviceSettings from "./DeviceSettings/DeviceSettings"; // DeviceSettings bileşenini import edin
 
 const StyledDataGrid = styled(DataGrid)({
   "& .MuiDataGrid-cell": {
@@ -34,6 +39,7 @@ export default function DataTable() {
   const [selectedRow, setSelectedRow] = useState(null);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
   const [selectedSettingsRow, setSelectedSettingsRow] = useState(null);
+  const [deviceSettingsModalOpen, setDeviceSettingsModalOpen] = useState(false);
 
   const handleProcessRowUpdate = (newRow) => {
     const updatedRows = rows.map((row) =>
@@ -51,7 +57,8 @@ export default function DataTable() {
     setModalOpen,
     setSelectedRow,
     setSettingsModalOpen,
-    setSelectedSettingsRow
+    setSelectedSettingsRow,
+    setDeviceSettingsModalOpen
   ).map((col) => ({
     ...col,
     renderCell:
@@ -89,6 +96,10 @@ export default function DataTable() {
     setSettingsModalOpen(false);
   };
 
+  const handleDeviceSettingsClose = () => {
+    setDeviceSettingsModalOpen(false);
+  };
+
   return (
     <div style={{ height: 600, width: "100%" }}>
       <StyledDataGrid
@@ -118,9 +129,9 @@ export default function DataTable() {
           <Control onSave={handleSave} selectedRow={selectedRow} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setModalOpen(false)} color="secondary">
+          <MuiButton onClick={() => setModalOpen(false)} color="secondary">
             Cancel
-          </Button>
+          </MuiButton>
         </DialogActions>
       </Dialog>
       <Dialog
@@ -137,9 +148,28 @@ export default function DataTable() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setSettingsModalOpen(false)} color="secondary">
+          <MuiButton
+            onClick={() => setSettingsModalOpen(false)}
+            color="secondary"
+          >
             Cancel
-          </Button>
+          </MuiButton>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={deviceSettingsModalOpen}
+        onClose={handleDeviceSettingsClose}
+        maxWidth="md"
+        fullWidth
+      >
+        <DialogTitle>Device Settings</DialogTitle>
+        <DialogContent dividers={true} sx={{ overflowX: "hidden" }}>
+          <DeviceSettings />
+        </DialogContent>
+        <DialogActions>
+          <MuiButton onClick={handleDeviceSettingsClose} color="secondary">
+            Cancel
+          </MuiButton>
         </DialogActions>
       </Dialog>
     </div>

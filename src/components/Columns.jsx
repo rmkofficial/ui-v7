@@ -9,8 +9,14 @@ const handleControlButtonClick = (row, setModalOpen, setSelectedRow) => {
   setModalOpen(true);
 };
 
-const handleDeviceSettingsButtonClick = (row) => {
+const handleDeviceSettingsButtonClick = (
+  row,
+  setDeviceSettingsModalOpen,
+  setSelectedRow
+) => {
   console.log("DeviceSettings button clicked for row:", row);
+  setSelectedRow(row);
+  setDeviceSettingsModalOpen(true);
 };
 
 const handleSettingsButtonClick = (
@@ -76,7 +82,8 @@ export const columns = (
   setModalOpen,
   setSelectedRow,
   setSettingsModalOpen,
-  setSelectedSettingsRow
+  setSelectedSettingsRow,
+  setDeviceSettingsModalOpen
 ) => [
   {
     field: "status",
@@ -105,7 +112,13 @@ export const columns = (
           variant="outlined"
           color="primary"
           startIcon={<SettingsIcon />}
-          onClick={() => handleDeviceSettingsButtonClick(params.row)}
+          onClick={() =>
+            handleDeviceSettingsButtonClick(
+              params.row,
+              setDeviceSettingsModalOpen,
+              setSelectedRow
+            )
+          }
           size="small"
           style={{ marginLeft: 10 }}
         >
